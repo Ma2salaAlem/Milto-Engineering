@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milto Engineering PLC — Water Resources &amp; Environmental Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#123243;
+    --ink-soft:#3E5C67;
+    --paper:#F1EFE4;
+    --paper-dim:#E7E4D6;
+    --aqua:#2E8C93;
+    --aqua-deep:#1E6B71;
+    --clay:#B5652F;
+    --line:#9FBEBE;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .display{font-family:'Big Shoulders Display', sans-serif; font-weight:700; letter-spacing:0.01em;}
+
+  ::selection{background:var(--aqua); color:var(--white);}
+  :focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(241,239,228,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1180px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-mark{
+    width:34px; height:34px; flex:none;
+  }
+  .brand-text{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800; font-size:20px; letter-spacing:0.02em;
+    line-height:1;
+  }
+  .brand-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px; letter-spacing:0.12em; color:var(--aqua-deep); text-transform:uppercase;
+  }
+  nav.links{display:flex; gap:30px; align-items:center;}
+  nav.links a{
+    font-size:13px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--ink-soft); position:relative; padding:4px 0;
+  }
+  nav.links a:hover{color:var(--aqua-deep);}
+  nav.links a.cta{
+    background:var(--ink); color:var(--paper); padding:9px 18px; border-radius:2px;
+    text-transform:none; font-family:'JetBrains Mono',monospace; letter-spacing:0.02em;
+  }
+  nav.links a.cta:hover{background:var(--aqua-deep);}
+  .menu-toggle{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer;}
+  .menu-toggle span{width:24px; height:2px; background:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    padding:0;
+  }
+  .hero-top{
+    position:relative;
+    background-size:cover; background-position:center;
+    padding:96px 0 72px;
+  }
+  .hero-top::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(18,50,67,0.94) 0%, rgba(18,50,67,0.86) 42%, rgba(18,50,67,0.55) 100%);
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em;
+    color:var(--line); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--aqua); display:inline-block;}
+  .hero h1{
+    font-size:clamp(40px, 6.4vw, 84px);
+    line-height:0.98;
+    max-width:820px;
+    margin-bottom:28px;
+  }
+  .hero h1 em{font-style:normal; color:var(--aqua);}
+  .hero p.lead{
+    font-size:18px; max-width:520px; color:#C9DAD9; margin-bottom:36px;
+  }
+  .hero-actions{display:flex; gap:16px; align-items:center; margin-bottom:64px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; font-weight:600; font-size:14px; border-radius:2px;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--aqua); color:var(--ink);}
+  .btn-primary:hover{background:#3fa0a7;}
+  .btn-ghost{border-color:var(--line); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--aqua); color:var(--aqua);}
+
+  .hero-strip{
+    border-top:1px solid rgba(159,190,190,0.25);
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .hero-strip div{
+    padding:22px 0; border-right:1px solid rgba(159,190,190,0.25);
+  }
+  .hero-strip div:last-child{border-right:none;}
+  .hero-strip .num{font-family:'Big Shoulders Display',sans-serif; font-size:30px; font-weight:700; color:var(--aqua);}
+  .hero-strip .lbl{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em; color:#9FB9B8; text-transform:uppercase; margin-top:4px;}
+
+  .contour-band{width:100%; display:block; height:auto; line-height:0;}
+  .contour-band svg{width:100%; height:auto; display:block;}
+
+  /* ---------- Section shared ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em;
+    color:var(--aqua-deep); text-transform:uppercase; margin-bottom:14px;
+  }
+  .section-head h2{
+    font-family:'Big Shoulders Display', sans-serif; font-weight:700;
+    font-size:clamp(30px,4vw,46px); line-height:1.02; margin-bottom:16px;
+  }
+  .section-head p{color:var(--ink-soft); font-size:16px; max-width:560px;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--paper);}
+  .service-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--paper); padding:30px 26px; min-height:190px;
+    display:flex; flex-direction:column; gap:14px; transition:background 0.2s;
+  }
+  .service-card:hover{background:var(--white);}
+  .service-code{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--clay); letter-spacing:0.06em;
+  }
+  .service-card h3{
+    font-family:'Big Shoulders Display', sans-serif; font-weight:600; font-size:21px; line-height:1.12;
+  }
+  .service-card p{font-size:13.5px; color:var(--ink-soft);}
+
+  .service-card.photo{
+    position:relative; color:#fff; min-height:230px; justify-content:flex-end;
+    background-size:cover; background-position:center; overflow:hidden;
+  }
+  .service-card.photo::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(190deg, rgba(18,50,67,0.12) 0%, rgba(18,50,67,0.88) 88%);
+    z-index:0;
+  }
+  .service-card.photo > *{position:relative; z-index:1;}
+  .service-card.photo .service-code{color:#8FD3D8;}
+  .service-card.photo h3{color:#fff;}
+  .service-card.photo p{color:#CBE0DF;}
+
+  button.service-card{
+    border:none; font-family:inherit; text-align:left; cursor:pointer; width:100%;
+  }
+  .service-card.wide{grid-column:span 3;}
+  @media (max-width:860px){ .service-card.wide{grid-column:span 1;} }
+  .service-card .read-more{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em;
+    color:var(--aqua-deep); margin-top:auto; padding-top:6px; opacity:0.85;
+  }
+  .service-card.photo .read-more{color:#8FD3D8;}
+  .service-card:hover .read-more{opacity:1; text-decoration:underline;}
+
+  /* ---------- Service detail modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(14,32,38,0.7); backdrop-filter:blur(3px);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:64px 20px; z-index:1000; opacity:0; pointer-events:none; transition:opacity 0.2s;
+    overflow-y:auto;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal-box{
+    background:var(--paper); max-width:680px; width:100%; border-radius:4px;
+    padding:44px 40px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    transform:translateY(12px); transition:transform 0.25s;
+  }
+  .modal-overlay.open .modal-box{transform:translateY(0);}
+  .modal-close{
+    position:absolute; top:18px; right:18px; background:none; border:1px solid var(--line);
+    width:32px; height:32px; border-radius:50%; cursor:pointer; color:var(--ink); font-size:14px;
+  }
+  .modal-close:hover{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .modal-eyebrow{font-size:11px; letter-spacing:0.1em; color:var(--clay); margin-bottom:10px; text-transform:uppercase;}
+  .modal-box h3{font-family:'Big Shoulders Display',sans-serif; font-size:28px; font-weight:700; margin-bottom:18px; max-width:520px; line-height:1.08;}
+  .modal-body p{font-size:14.5px; color:var(--ink-soft); margin-bottom:14px;}
+  .modal-body strong{color:var(--ink); font-weight:600;}
+  .modal-body h4{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--aqua-deep); margin:20px 0 8px;}
+  @media (max-width:640px){
+    .modal-box{padding:32px 22px;}
+  }
+
+  /* ---------- Cross-section signature block ---------- */
+  .strata{
+    background:var(--ink); color:var(--paper); position:relative; overflow:hidden;
+  }
+  .strata .wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+  }
+  .strata-copy .eyebrow{color:var(--aqua);}
+  .strata-copy h2{
+    font-family:'Big Shoulders Display',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; margin-bottom:18px; line-height:1.05;
+  }
+  .strata-copy p{color:#C9DAD9; font-size:15.5px; margin-bottom:14px; max-width:480px;}
+  .strata-fig{
+    border:1px solid rgba(159,190,190,0.35); border-radius:3px; overflow:hidden; background:var(--paper);
+  }
+  .strata-fig img{width:100%; display:block;}
+  .strata-fig figcaption{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-soft);
+    padding:10px 14px; border-top:1px solid var(--line); background:var(--paper-dim);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Why choose us ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
+  .why-card{padding-top:22px; border-top:2px solid var(--ink);}
+  .why-card .ic{width:34px; height:34px; margin-bottom:18px; color:var(--aqua-deep);}
+  .why-card h3{font-family:'Big Shoulders Display',sans-serif; font-size:20px; font-weight:600; margin-bottom:10px;}
+  .why-card p{font-size:14px; color:var(--ink-soft);}
+
+  /* ---------- Projects ---------- */
+  .projects{background:var(--paper-dim);}
+  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .project-card.wide{grid-column:span 3;}
+  @media (max-width:860px){ .project-card.wide{grid-column:span 1;} }
+  .project-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:3px; padding:28px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .client-tag{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft); letter-spacing:0.03em;}
+  .status{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:4px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .status.completed{background:rgba(46,140,147,0.14); color:var(--aqua-deep);}
+  .status.ongoing{background:rgba(181,101,47,0.14); color:var(--clay);}
+  .project-card h3{font-family:'Big Shoulders Display',sans-serif; font-size:23px; font-weight:600; line-height:1.1;}
+  .project-card .loc{font-size:13.5px; color:var(--ink-soft); display:flex; gap:6px; align-items:center;}
+  .project-card .loc svg{width:13px; height:13px; flex:none;}
+  .project-card.branded{padding:0; overflow:hidden;}
+  .project-card.branded .brand-strip{
+    height:92px; display:flex; align-items:center; justify-content:center;
+    background-color:#fff; background-repeat:no-repeat; background-position:center;
+    background-size:contain; padding:16px; border-bottom:1px solid var(--line);
+  }
+  .project-card.branded .project-body{padding:22px 26px 28px; display:flex; flex-direction:column; gap:14px;}
+  .clients-strip{
+    display:flex; flex-wrap:wrap; gap:14px; margin-bottom:52px;
+  }
+  .clients-strip span{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.04em;
+    color:var(--ink-soft); border:1px solid var(--line); padding:8px 16px; border-radius:20px;
+    background:var(--paper);
+  }
+
+  /* ---------- Mission / Vision / Values ---------- */
+  .mvv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .mvv-card{background:var(--paper); padding:34px 28px;}
+  .mvv-card.dark{background:var(--ink); color:var(--paper);}
+  .mvv-icon{width:34px; height:34px; margin-bottom:20px; color:var(--aqua);}
+  .mvv-card:not(.dark) .mvv-icon{color:var(--aqua-deep);}
+  .mvv-card .eyebrow{margin-bottom:16px;}
+  .mvv-card.dark .eyebrow{color:var(--aqua);}
+  .mvv-card p{font-size:14px; color:var(--ink-soft); line-height:1.65;}
+  .mvv-card.dark p{color:#C9DAD9;}
+  .mvv-card ul{list-style:none; margin-top:6px;}
+  .mvv-card ul li{font-size:13.5px; color:var(--ink-soft); padding:5px 0 5px 16px; position:relative;}
+  .mvv-card ul li::before{content:"—"; position:absolute; left:0; color:var(--clay);}
+
+  /* ---------- CTA ---------- */
+  .cta-band{
+    background:var(--aqua); color:var(--ink); text-align:center; padding:72px 0;
+  }
+  .cta-band h2{font-family:'Big Shoulders Display',sans-serif; font-size:clamp(28px,4vw,44px); font-weight:700; margin-bottom:20px;}
+  .cta-band p{max-width:480px; margin:0 auto 30px; font-size:15.5px;}
+  .cta-band .btn-primary{background:var(--ink); color:var(--paper);}
+  .cta-band .btn-primary:hover{background:#1a4657;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:#C9DAD9; padding:64px 0 28px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(159,190,190,0.2);}
+  .foot-brand .brand-text{color:var(--paper);}
+  .foot-brand p{font-size:13.5px; margin-top:16px; max-width:280px; color:#9FB9B8;}
+  footer h4{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--aqua); margin-bottom:16px;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:10px; font-size:14px;}
+  footer a:hover{color:var(--white);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:26px; font-size:12.5px; color:#7E9C9B; flex-wrap:wrap; gap:10px;}
+
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .menu-toggle{display:flex;}
+    .hero-strip{grid-template-columns:repeat(2,1fr);}
+    .hero-strip div:nth-child(2){border-right:none;}
+    .service-grid{grid-template-columns:1fr;}
+    .strata .wrap{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .project-grid{grid-template-columns:1fr;}
+    .mvv-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#" class="brand">
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none">
+        <path d="M17 3C17 3 7 14.5 7 21.5C7 26.7 11.5 31 17 31C22.5 31 27 26.7 27 21.5C27 14.5 17 3 17 3Z" stroke="#2E8C93" stroke-width="2"/>
+        <path d="M11 21.5C11 24.5 13.7 27 17 27" stroke="#B5652F" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="brand-text">MILTO</div>
+        <div class="brand-sub">Engineering PLC</div>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="cta">GET A QUOTE →</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-top" style="background-image:url('https://s7d1.scene7.com/is/image/wbcollab/hero_girlplayingwithwater?qlt=90&hei=630&wid=1200&fit=hfit');">
+    <div class="wrap">
+      <div class="hero-eyebrow"><span class="dot"></span> GENERAL WATER CONSULTANCY LICENSE · GRADE ONE · ADDIS ABABA</div>
+      <h1 class="display">Mapping what's<br>under the ground,<br>for what's built <em>above it.</em></h1>
+      <p class="lead">Milto Engineering PLC is a specialized consulting firm in water resources development and environment — study, design, construction supervision and training, from first borehole to final handover.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start a project →</a>
+        <a href="#projects" class="btn btn-ghost">See our fieldwork</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-strip wrap" style="max-width:1180px; margin:0 auto; padding-left:32px; padding-right:32px;">
+    <div><div class="num mono">2021</div><div class="lbl">Established</div></div>
+    <div><div class="num mono">13+</div><div class="lbl">Service disciplines</div></div>
+    <div><div class="num mono">G1</div><div class="lbl">Grade one license</div></div>
+    <div><div class="num mono">100%</div><div class="lbl">Projects completed</div></div>
+  </div>
+  <div class="contour-band" aria-hidden="true">
+    <svg viewBox="0 0 1180 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C120,10 220,70 340,45 C460,20 560,75 680,50 C800,25 900,65 1020,42 C1090,30 1140,48 1180,38 L1180,90 L0,90 Z" fill="#1B4552"/>
+      <path d="M0,55 C140,30 260,80 400,58 C540,36 640,85 780,60 C900,40 1000,72 1180,55 L1180,90 L0,90 Z" fill="#F1EFE4"/>
+    </svg>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Sheet 01 — Capabilities</div>
+      <h2>Major fields of service.</h2>
+      <p>Study, design, construction supervision and training across water resources, geosciences and environmental management.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="service-grid">
+      <button class="service-card photo" data-service="wr01" style="background-image:url('https://chandradaya-investasi.com/_next/image?url=https%3A%2F%2Fchandradaya-investasi.com%2Ffile-storage%2FcitVNDg4cm5EdWpjQW9GNzRTREFPKzVkY3dwQlljT3NKQmVweWpEbHB6OXhWRmc2K1Vta2Q1c2lQK2VXaVhlSDlmZDFHT0tERTFET0F1bU10M0YyNEE9PQ&w=3840&q=75');">
+        <span class="service-code">WR — 01</span>
+        <h3>Water Resources Assessment &amp; Management</h3>
+        <p>Development and management of groundwater and surface water resources.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="ws02" style="background-image:url('https://msconsultancyet.com/wp-content/uploads/2024/01/photo.jpg');">
+        <span class="service-code">WS — 02</span>
+        <h3>Water Supply &amp; Sanitation</h3>
+        <p>Town and rural water supply design through to sanitation systems.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="gw03" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-k7xjCCb1TwUD2q--v3magKgN8-Xlo8b6y70VvovYQDTMBcq1k6AvTFCV&s=10');">
+        <span class="service-code">GW — 03</span>
+        <h3>Groundwater Development &amp; Monitoring</h3>
+        <p>Wellfield development, yield testing and long-term monitoring.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="hg04" style="background-image:url('https://www.researchgate.net/publication/393613451/figure/fig3/AS:11431281625003001@1757253471393/Geological-and-hydrogeological-map-of-the-study-area.png');">
+        <span class="service-code">HG — 04</span>
+        <h3>Geological &amp; Hydrogeological Mapping</h3>
+        <p>Aquifer delineation and subsurface mapping for water development.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="gp05" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbegWqv8YijK7-T7AMp1fGpGAqxY25AHnvfQLn8ZyLDFVqLDYWendXzMoI&s=10');">
+        <span class="service-code">GP — 05</span>
+        <h3>Geophysical Investigations</h3>
+        <p>VES, ERT, magnetic, gravity and seismic surveys ahead of drilling.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="gt06" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR32YZSRzhSZ9IeacRBCrVfuwtYCTdA21OWZxXaqQu_qGVArMeTZZg49mA&s=10');">
+        <span class="service-code">GT — 06</span>
+        <h3>Geotechnical Investigations</h3>
+        <p>Subsurface exploration, foundation design and earthworks planning.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="id07" style="background-image:url('https://cdn.britannica.com/70/156670-050-7E37C3D6/Irrigation-canal-farm-field.jpg');">
+        <span class="service-code">ID — 07</span>
+        <h3>Irrigation &amp; Drainage Engineering</h3>
+        <p>Scheme design for agricultural water management.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="ww08" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu2Lj5DtkFn_EEdeDgpYyBDKwqV2QGWZKkUbzGhVAwrm1AFbQAijowiPM&s=10');">
+        <span class="service-code">WW — 08</span>
+        <h3>Waste Water Treatment System Design</h3>
+        <p>Treatment system design suited to site and load conditions.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="dw09" style="background-image:url('https://www.khansahebsykes.com/wp-content/uploads/sites/9/2026/06/Wellpoint-Dewatering-Installation.webp');">
+        <span class="service-code">DW — 09</span>
+        <h3>Dewatering &amp; Groundwater Management for Excavations</h3>
+        <p>Dewatering investigations for safe, dry excavation works.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="bh10" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQoaeh9O4Uak2n9EGAEYhzINJVRF_ZPY8oTG4GPfkZae9rUKjFDPrNO6MY&s=10');">
+        <span class="service-code">BH — 10</span>
+        <h3>Borehole Geophysical Logging &amp; Camera Investigations</h3>
+        <p>Downhole logging and visual inspection of borehole conditions.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="ei11" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBStT9kMhIdZqltleQ5gDHxBHxBxWHjskWUdTMp1grn4mRlhcPBgqJOo&s=10');">
+        <span class="service-code">EI — 11</span>
+        <h3>Environmental Impact Assessment &amp; Management</h3>
+        <p>EIA, mitigation planning, compliance monitoring, stakeholder engagement.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo" data-service="cs12" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjjlWTYUV0NTdx3HOm4Ollxx9POQIz4Q9B2zgOqNPpqc-0Dzci8aIW4kA&s=10');">
+        <span class="service-code">CS — 12</span>
+        <h3>Construction Supervision &amp; Contract Administration</h3>
+        <p>On-site supervision and contract administration of water supply works.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+      <button class="service-card photo wide" data-service="gis13" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9dSNFlVv87yepAmQCLwq1i4m2GTREjpkriBgdop3SUg&s=10');">
+        <span class="service-code">GIS — 13</span>
+        <h3>GIS &amp; Remote Sensing Services</h3>
+        <p>Spatial analysis, mapping and satellite-imagery interpretation.</p>
+        <span class="read-more">Read more →</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="serviceModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-eyebrow mono" id="modalCode"></div>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<section class="strata">
+  <div class="wrap">
+    <div class="strata-copy">
+      <div class="eyebrow">Sheet 02 — Method</div>
+      <h2 class="display">We read the ground before we design for it.</h2>
+      <p>Every water supply or drilling project starts below the surface. Our hydrogeological cross-sections map aquifer type, groundwater flow direction and static water level along the full profile — the evidence base for every recommendation we make.</p>
+      <p>Borehole geophysical logging, camera investigations and topographic survey feed directly into this picture before a single well is sited.</p>
+    </div>
+    <figure class="strata-fig">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeIAAAFQCAMAAABUNY3vAAAA/1BMVEVe1WBkqWWcaQhqbWuirtTX5empzNs2lTeVoKG01adyUA93l5Y8n0clrNzF5bKJmHFFmDtetNSUa1dtc41vx+DUmd1cNgrJd9WfZ5TYpJ8rNnUIY+PeH60vLSs0cjQZU5wsW1i2csvMZWHVER0wnZDKXp2DynqhPXGPiDnyGcquNo/KiHJ2yoI9yGpEecT+/v5Ut1Tq6upn2GhOqE9WxVfW19aoqKm3uLeXmJdlyGfGx8dp42pZ11lLmUuHh4inuuQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApvN8EAAAAQHRSTlP/////////////////////////////////////////////////////////////////////////////////////73leyQAARjhJREFUeNrtfQtD27qyroXixEB2k0LbRffq6lp73f0+515btmXJTuz+/3915xvJrxAgQKA8rFIU27IS8nlGM6N5BPGgqam9wRYMEK4aO7W314YQmyqe2ttrI4j19H1MEE9tgnhqE8RTmyCe2gTx1CaIpzZBPEE8tQni+7TwhtdTezMQz294PbV3CPFE468G4vA+EM8nGn99EIfz8ZHqD2bXCXUeThC/cojn5z2G4fl8gvjtQXyXRD2EWE1wvEqI7xjcE/Z1Gp/krxcK8fz8gbLZAGEzce5XpDQ9qM0miN86xNEE8bug4nCSv14ZxFrz9IfANj/HqPDjBM/rgliaolBaVfT/JmQfJJRP7bkhDm9SdaRtCGTbNEbecMP8fhNO7adDvIOY1FI3RdPYeIL4jUJsY1XYoihMXNx1w3yC+CVDPL+DKG9+Jnrz1j6IJ6BfDMTRbD/EN0I078Z9Cvfd6a/PJqxeHBXv2Jznd0O8f+wE8ctVmubhQRDvYd2z+Q3WkKm9ZL34AIg7ffljuAf2CasXDvEea0Z4O9nvXDt/yEMztWeE+BCIboN4j7g2QfzCGHX4SIh90xPELxbiFqLwcRAPbppNG1EvEuIexnAXon3ee7dAvFfuntrPgHhsgBxAfK5uHRnf5c43mwxeLxzieyla7STq40S6Lx3ie0F0HeL7PSJTex6Ix6CE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" alt="Hydrogeological cross-section prepared by Milto Engineering showing aquifer strata, groundwater flow direction and static water level along a survey profile">
+      <figcaption>FIG. WR-H10 — HYDROGEOLOGICAL CROSS-SECTION, AWASH-AI VALLEY WELLFIELD</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Sheet 03 — Standards</div>
+      <h2>Why clients choose us.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="17" cy="12.5" r="4.5"/>
+          <path d="M9 27 C9 20.5 12.5 17 17 17 C21.5 17 25 20.5 25 27" stroke-linecap="round"/>
+          <path d="M17 3 L17.9 5.4 L20.5 5.6 L18.5 7.2 L19.2 9.7 L17 8.3 L14.8 9.7 L15.5 7.2 L13.5 5.6 L16.1 5.4 Z" fill="currentColor" stroke="none"/>
+          <path d="M6.5 8 L7 9.4 L8.5 9.5 L7.3 10.4 L7.7 11.8 L6.5 11 L5.3 11.8 L5.7 10.4 L4.5 9.5 L6 9.4 Z" fill="currentColor" stroke="none"/>
+          <path d="M27.5 8 L28 9.4 L29.5 9.5 L28.3 10.4 L28.7 11.8 L27.5 11 L26.3 11.8 L26.7 10.4 L25.5 9.5 L27 9.4 Z" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>Professional integrity</h3>
+        <p>Devotion to professional integrity and principles of ethics on every engagement, public or private.</p>
+      </div>
+      <div class="why-card">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M11 30 C11 24.5 13.5 21.5 17 21.5 C20.5 21.5 23 24.5 23 30" stroke-linecap="round"/>
+          <circle cx="17" cy="18" r="3.2"/>
+          <path d="M17 3 L18.2 6.6 L22 6.6 L18.9 8.8 L20.1 12.4 L17 10.2 L13.9 12.4 L15.1 8.8 L12 6.6 L15.8 6.6 Z" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>Client satisfaction</h3>
+        <p>Long-term partnership built on quality delivered within agreed timeframes and cost.</p>
+      </div>
+      <div class="why-card">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 16 L9 12 L14 16 L11 19 L15 23 L18 20 L23 24 L26 21 L31 16" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M9 12 L13 8 L18 8 L14 13" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M23 24 L20 27 L15 27 L19 22" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <h3>Genuine partnership</h3>
+        <p>Working alongside similar service providers and clients with transparency and authenticity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Sheet 04 — Field record</div>
+      <h2>Selected projects.</h2>
+      <p>A sample of completed engagements across geophysical investigation, drilling supervision and wellfield development.</p>
+    </div>
+    <div class="clients-strip">
+      <span>Ethiopian Airlines</span>
+      <span>Tsedey Bank S.C.</span>
+      <span>IREC</span>
+      <span>Team &amp; Team International</span>
+      <span>MIDROC Investment Group</span>
+      <span>International Medical Corps</span>
+      <span>ChildFund Ethiopia</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw7zQdJ0H_1HqbfopK259p9nzQExavQ4Xtrqa-vu7_Fw&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — ETHIOPIAN AIRLINES</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Hydrogeological Investigation &amp; Drilling Supervision — Water Supply Wells for Bole International Airport</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Addis Ababa
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_MdzIl5rwVCIMdWA3JvCbKAb9RRH3hgd-WIWt95MvQ&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — TSEDEY BANK S.C.</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Hydrogeological &amp; Geophysical Investigation — Headquarters Building Water Supply Well Siting &amp; Drilling Supervision</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Addis Ababa
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJRSa6OHYLnn_Cd_Tx1i6F2va5lURYlEVWHnGOVUnQQ&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — IREC</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Hydrogeological &amp; Geophysical Investigation — Water Well Drilling Site Selection, Chebera Churchura Luxury Lodge</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Chebera Churchura, SNNPR
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://cdn.imweb.me/upload/S2023082175cb66548ec88/d889605fc3661.png');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — TEAM &amp; TEAM INTERNATIONAL</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Hydrogeological &amp; Geophysical Survey — Drilling Site Selection, Edeneba Kebele Water Supply, Sanitation &amp; Hygiene Project</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Edeneba Kebele, Mitto Wereda, Siltie Zone
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3la9OhFlFuMDkVy0wKQtChW-DvPRkP1VoVVZSUpgHAJEj4bc96ZDdjp0&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — MIDROC INVESTMENT GROUP</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Geophysical Investigation (VES) at 18 Points</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Shinile &amp; Adigala Wereda, Somali Regional State
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Pr_Yq5ZTZW42KS-lvB3rLGRWFbXc0RVSWhV7gFJZcQ&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — INTERNATIONAL MEDICAL CORPS</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Drilling Supervision — Asayita Refugee Camp Water Supply Well</h3>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Asayita, Afar Regional State
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded wide">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclJSLB8PWspsMVAESPJSAO2rlsL-liGfThswXDMJD5A&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">CLIENT — CHILDFUND ETHIOPIA</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Water Point Siting &amp; Hydrogeological Investigation — Rural WASH Programme</h3>
+          <p style="font-size:13.5px; color:var(--ink-soft); max-width:640px;">Groundwater investigation and borehole siting in support of ChildFund Ethiopia's water, sanitation and hygiene programming — helping direct drilling toward sites with the best prospect of a reliable, year-round yield for the communities served.</p>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Ethiopia
+          </div>
+        </div>
+      </div>
+      <div class="project-card branded wide">
+        <div class="brand-strip" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt0sAtf2GuHIxRCKv2BQ2nR5O2oFif-n5N_zXsxMM3nw&s=10');"></div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="client-tag">PARTNER — EXPERTISE FRANCE</span>
+            <span class="status completed">Completed</span>
+          </div>
+          <h3>Hydrogeological Cross-Section Mapping — Technical Partnership</h3>
+          <p style="font-size:13.5px; color:var(--ink-soft); max-width:640px;">Milto Engineering has worked alongside Expertise France, the French public agency for international technical cooperation, on hydrogeological survey and mapping work — combining local field data with international technical standards to produce the cross-section studies that guide our wellfield recommendations.</p>
+          <div class="loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            Ethiopia
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Sheet 05 — Who we are</div>
+      <h2>Mission, vision, values.</h2>
+      <p>Milto Engineering PLC is a grade-one water resources and related-fields consulting firm, established in August 2021 by experienced and energetic professionals.</p>
+    </div>
+    <div class="mvv-grid">
+      <div class="mvv-card dark">
+        <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="15.5" cy="17.5" r="11"/>
+          <circle cx="15.5" cy="17.5" r="6.5"/>
+          <circle cx="15.5" cy="17.5" r="2" fill="currentColor" stroke="none"/>
+          <path d="M23 10 L23 5 L27 3 L27 7.5 L31 7.5 L23 10 Z" stroke-linejoin="round"/>
+          <path d="M23 10 L28 5" stroke-linecap="round"/>
+        </svg>
+        <div class="eyebrow mono">MISSION</div>
+        <p>To provide professional service in study, design, contract administration and construction supervision of projects to the highest standards of quality, within the agreed timeframe and at reasonable prices — through long-term partnership to the satisfaction of clients, employees, the public and the environment at large.</p>
+      </div>
+      <div class="mvv-card">
+        <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 30 L13 15 L18 22 L22 16 L30 30 Z" stroke-linejoin="round"/>
+          <circle cx="14" cy="9" r="2.6"/>
+          <path d="M15.8 7.5 L21 5 L21 8.5 L24.5 8.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="eyebrow">VISION</div>
+        <p>Milto Engineering PLC aspires to be a center of excellence in providing technical consulting services in Ethiopia.</p>
+      </div>
+      <div class="mvv-card dark">
+        <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 13 L17 4 L25 13 L17 30 Z" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M9 13 L25 13" stroke-linecap="round"/>
+          <path d="M13.5 13 L17 4 L20.5 13" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M13.5 13 L17 30 M20.5 13 L17 30" stroke-linecap="round"/>
+        </svg>
+        <div class="eyebrow mono">VALUES</div>
+        <ul>
+          <li>Dedication to the welfare of the people</li>
+          <li>Commitment to clients' satisfaction</li>
+          <li>Transparency, accountability, fairness</li>
+          <li>Cost consciousness</li>
+          <li>Teamwork spirit and innovation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2 class="display">Have a site that needs reading?</h2>
+    <p>Send us your scope — study, design, drilling supervision or investigation — and we'll respond with next steps.</p>
+    <a href="mailto:admin@miltoengineering.com" class="btn btn-primary">admin@miltoengineering.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand-text display">MILTO ENGINEERING</div>
+        <p>Specialized consulting firm in water resources development and environment, with a general water consultancy license.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Bole Subcity, Werda 03,<br>Abate Building, Office 208</li>
+          <li>+251-901-000960</li>
+          <li>admin@miltoengineering.com</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://web.facebook.com/miltoengineering" target="_blank" rel="noopener">Facebook — miltoengineering</a></li>
+          <li><a href="https://t.me/miltoengineeringplc" target="_blank" rel="noopener">Telegram — miltoengineeringplc</a></li>
+          <li><a href="https://www.linkedin.com/company/milto-engineering-plc/" target="_blank" rel="noopener">LinkedIn — milto-engineering-plc</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Milto Engineering PLC. All rights reserved.</span>
+      <span class="mono">ADDIS ABABA, ETHIOPIA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SERVICES = {
+  wr01: {
+    code: 'WR — 01',
+    title: 'Water Resources Assessment & Management',
+    body: `<p>Milto Engineering specializes in groundwater and surface waters assessment by gathering essential primary and secondary data on the quantity and quality of water resources for the purpose of developing water resources for town water supply, irrigation, dam construction, and management.</p>
+    <h4>Why choose us</h4>
+    <p><strong>Customized solutions:</strong> we customize our services to match the unique demands and specifications of each project.</p>
+    <p><strong>Quality assurance:</strong> our team maintains the highest standards of excellence and complies with regulatory criteria.</p>`
+  },
+  ws02: {
+    code: 'WS — 02',
+    title: 'Water Supply & Sanitation',
+    body: `<p>Milto Engineering specializes in water supply system design and sanitation, ensuring clean and safe water access for communities and enterprises. Our professional staff is committed to providing effective solutions to address the increasing demand for water and sanitation infrastructure.</p>
+    <h4>Our services include</h4>
+    <p><strong>Water supply services:</strong> designing water supply systems for urban, rural, residential, commercial and industrial applications, including water treatment methods to ensure all customers have access to clean and potable water.</p>
+    <p><strong>Sanitation services:</strong> creating sanitation infrastructure to enhance cleanliness and prevent water-borne illnesses, and developing waste management systems for proper disposal and recycling of water-related waste.</p>
+    <h4>Why choose us</h4>
+    <p>Customized solutions matched to each project, quality assurance against regulatory criteria, and a commitment to public health through sustainable water supply and sanitation systems.</p>`
+  },
+  gw03: {
+    code: 'GW — 03',
+    title: 'Groundwater Development & Monitoring',
+    body: `<p>Milto Engineering develops and monitors groundwater resources from initial wellfield delineation through to long-term yield and water-level monitoring — supporting town water supply, irrigation and industrial abstraction with data clients can rely on.</p>
+    <h4>Our services include</h4>
+    <p>Wellfield development and siting, pumping and yield testing, water-level and quality monitoring networks, and long-term aquifer performance tracking.</p>
+    <h4>Why choose us</h4>
+    <p>Field data collected and interpreted by the same team that designs the resulting supply scheme — so monitoring feeds directly back into design decisions.</p>`
+  },
+  hg04: {
+    code: 'HG — 04',
+    title: 'Geological & Hydrogeological Mapping',
+    body: `<p>Milto Engineering provides complete geological and hydrogeological mapping services to support environmental, geotechnical and water resource projects. Our professionals are dedicated to providing reliable and detailed mapping data for a wide range of applications.</p>
+    <h4>Our services include</h4>
+    <p><strong>Geological mapping:</strong> detailed geological surveys mapping surface and subsurface features, used to support groundwater investigations, mineral exploration, land development and environmental assessments.</p>
+    <p><strong>Hydrogeological mapping:</strong> using modern geophysical and hydrogeological techniques, we map the distribution and behavior of groundwater resources — with insights into resource management, well-field delineation, well siting and contamination evaluation.</p>
+    <h4>Why choose us</h4>
+    <p><strong>Expertise:</strong> our team contributes deep knowledge to each project. <strong>Precision:</strong> state-of-the-art mapping technologies for accurate data collection. <strong>Client-centric approach:</strong> customized mapping solutions built around your needs.</p>`
+  },
+  gp05: {
+    code: 'GP — 05',
+    title: 'Geophysical Investigations',
+    body: `<p>Milto Engineering provides specialized geophysical surveys that deliver important insights for a variety of projects and applications. Our geophysical professionals use cutting-edge technologies and methodology to conduct in-depth surveys and analysis that help clients make informed decisions and mitigate risk.</p>
+    <h4>Our services include</h4>
+    <p>Detailed geophysical surveying — Vertical Electrical Sounding (VES), Electrical Resistivity Tomography (ERT), Magnetic Survey, Gravity Survey and Seismic Survey — for engineering, groundwater investigation and mineral exploration applications.</p>
+    <h4>Why choose us</h4>
+    <p><strong>Technical expertise:</strong> accurate, reliable geophysical data. <strong>State-of-the-art equipment:</strong> cutting-edge instruments and software for precise investigation. <strong>Client collaboration:</strong> tailored solutions built around your project requirements.</p>`
+  },
+  gt06: {
+    code: 'GT — 06',
+    title: 'Geotechnical Investigations',
+    body: `<p>Milto Engineering specializes in comprehensive geotechnical investigation services to support infrastructure projects, construction developments and environmental assessments. Our geotechnical engineers deliver reliable data and analysis to mitigate risk and ensure the stability and safety of your projects.</p>
+    <h4>Our services include</h4>
+    <p><strong>Subsurface exploration:</strong> soil sampling, testing and analysis of physical and mechanical properties, plus in-situ tests and borehole logging to evaluate bearing capacity and geological conditions.</p>
+    <p><strong>Foundation design:</strong> geotechnical recommendations for foundation design and construction, slope stability assessment and hazard mitigation.</p>
+    <p><strong>Earthworks & excavation planning:</strong> evaluating soil properties and recommending earthwork and excavation techniques, soil stabilization and ground improvement solutions.</p>`
+  },
+  id07: {
+    code: 'ID — 07',
+    title: 'Irrigation & Drainage Engineering',
+    body: `<p>Milto Engineering designs irrigation and drainage schemes that match real field conditions — from scheme layout through to water management planning for agricultural development.</p>
+    <h4>Our services include</h4>
+    <p>Irrigation scheme design, drainage system planning, and water-use efficiency assessment for agricultural and land development projects.</p>
+    <h4>Why choose us</h4>
+    <p>Schemes designed on the back of our own hydrogeological and topographic survey data, so recommendations are grounded in the specific site rather than generic templates.</p>`
+  },
+  ww08: {
+    code: 'WW — 08',
+    title: 'Waste Water Treatment System Design',
+    body: `<p>Milto Engineering designs wastewater treatment systems suited to site conditions and expected load — covering both community-scale and institutional facilities.</p>
+    <h4>Our services include</h4>
+    <p>Treatment system design and sizing, technology selection matched to site and budget, and integration with existing water supply and sanitation infrastructure.</p>
+    <h4>Why choose us</h4>
+    <p>Designs grounded in the same site data — soils, hydrogeology, topography — that inform our water supply work, for systems that perform under real local conditions.</p>`
+  },
+  dw09: {
+    code: 'DW — 09',
+    title: 'Dewatering & Groundwater Management for Excavations',
+    body: `<p>Milto Engineering specializes in comprehensive dewatering investigations and groundwater management services for excavation projects. Our experienced team addresses the complex challenges of water control in excavations, ensuring successful and efficient project completion.</p>
+    <h4>Our services include</h4>
+    <p><strong>Dewatering investigations:</strong> thorough assessments to determine the most suitable dewatering method for your excavation, evaluating groundwater conditions and developing customized strategies.</p>
+    <p><strong>Groundwater management:</strong> controlling and monitoring water levels during excavation, tailored to each site's requirements.</p>
+    <p><strong>Design & implementation:</strong> from initial planning through execution, integrated with regulatory standards and project objectives.</p>
+    <p><strong>Monitoring & maintenance:</strong> ongoing monitoring to keep systems effective and excavation activities on schedule.</p>
+    <h4>Why choose us</h4>
+    <p>Extensive expertise, a customized approach per project, strict compliance and safety standards, and a proven track record on excavation dewatering works.</p>`
+  },
+  bh10: {
+    code: 'BH — 10',
+    title: 'Borehole Geophysical Logging & Camera Investigations',
+    body: `<p>Milto Engineering offers comprehensive borehole geophysical logging and camera investigations, providing in-depth insight into subsurface conditions for a range of industries and applications.</p>
+    <h4>Our services include</h4>
+    <p><strong>Borehole geophysical logging:</strong> advanced logging techniques to assess formations, fluid properties and structural features — supporting engineering, environmental and exploration decisions.</p>
+    <p><strong>Camera investigations:</strong> high-resolution camera inspection of boreholes to identify issues, anomalies and conditions within the well.</p>
+    <p><strong>Data interpretation & reporting:</strong> clear, concise findings and recommendations.</p>
+    <p><strong>Consultation:</strong> our team discusses findings and works with clients to develop tailored solutions.</p>`
+  },
+  ei11: {
+    code: 'EI — 11',
+    title: 'Environmental Impact Assessment & Management',
+    body: `<p>Milto Engineering provides comprehensive environmental impact assessment and management services. Our expertise in assessing and mitigating environmental risk supports projects across industries, ensuring sustainable practice and regulatory compliance.</p>
+    <h4>Our services include</h4>
+    <p><strong>Environmental Impact Assessment (EIA):</strong> evaluating the effects of proposed projects on natural habitats, ecosystems and communities, and identifying risks and mitigation strategies.</p>
+    <p><strong>Impact mitigation & management plans:</strong> designing measures to preserve biodiversity, manage waste, reduce emissions and protect natural resources.</p>
+    <p><strong>Compliance monitoring:</strong> ongoing monitoring to ensure projects meet environmental regulations and permit requirements.</p>
+    <p><strong>Stakeholder engagement:</strong> facilitating engagement with communities, government agencies and other stakeholders.</p>`
+  },
+  cs12: {
+    code: 'CS — 12',
+    title: 'Construction Supervision & Contract Administration',
+    body: `<p>Milto Engineering offers comprehensive construction supervision and contract administration for water supply works, ensuring successful implementation of water infrastructure projects and delivery of high-quality, reliable systems.</p>
+    <h4>Our services include</h4>
+    <p><strong>Construction supervision:</strong> on-site oversight of execution against design specifications, quality standards and safety regulations.</p>
+    <p><strong>Quality assurance & control:</strong> inspections and evaluations to verify compliance with technical specifications.</p>
+    <p><strong>Contract administration:</strong> managing documentation, correspondence, progress reporting, payments, variations and claims.</p>
+    <p><strong>Compliance monitoring & reporting:</strong> tracking adherence to environmental, health, safety and legal requirements with transparent progress updates.</p>`
+  },
+  gis13: {
+    code: 'GIS — 13',
+    title: 'GIS & Remote Sensing Services',
+    body: `<p>Milto Engineering is a provider of geospatial solutions, offering services tailored to mapping, analysis and visualization needs across industries and applications.</p>
+    <h4>Our services include</h4>
+    <p><strong>Spatial analysis:</strong> identifying patterns and insights from geographic data through spatial modeling and decision-making support.</p>
+    <p><strong>Map creation & visualization:</strong> customized maps that communicate complex information clearly.</p>
+    <p><strong>Remote sensing interpretation:</strong> analysis of satellite imagery and aerial photographs for land cover, land use, vegetation health and environmental variables.</p>
+    <p><strong>Data integration & analysis:</strong> combining satellite imagery, GPS data and demographic information into data-driven solutions.</p>`
+  }
+};
+
+const modal = document.getElementById('serviceModal');
+const modalCode = document.getElementById('modalCode');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+document.querySelectorAll('[data-service]').forEach(card => {
+  card.addEventListener('click', () => {
+    const s = SERVICES[card.dataset.service];
+    if (!s) return;
+    modalCode.textContent = s.code;
+    modalTitle.textContent = s.title;
+    modalBody.innerHTML = s.body;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    modalClose.focus();
+  });
+});
+
+function closeModal(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+}
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
