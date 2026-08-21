@@ -2116,6 +2116,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('scroll', revealOnScroll);
 });
+
+// Force scroll to top after full page load (fixes mobile scroll restoration bug)
+window.addEventListener('load', () => {
+  // Disable smooth scrolling temporarily to prevent animation
+  document.body.style.scrollBehavior = 'auto';
+  window.scrollTo(0, 0);
+  // Restore smooth scrolling after a brief delay
+  setTimeout(() => {
+    document.body.style.scrollBehavior = '';
+  }, 100);
+});
 </script>
 
 </body>
