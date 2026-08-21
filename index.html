@@ -80,22 +80,60 @@
   }
 
   /* ---------- Animations ---------- */
-  @keyframes caustic {
-    0%, 100% { opacity: 0.3; transform: translateX(0) translateY(0); }
-    25% { opacity: 0.5; transform: translateX(20px) translateY(-10px); }
-    50% { opacity: 0.4; transform: translateX(-10px) translateY(20px); }
-    75% { opacity: 0.6; transform: translateX(15px) translateY(15px); }
+  @keyframes ocean-pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+
+  @keyframes caustic-flow {
+    0%, 100% { 
+      opacity: 0.6; 
+      transform: translateX(0) translateY(0) scale(1);
+      filter: blur(20px) hue-rotate(0deg);
+    }
+    25% { 
+      opacity: 0.8; 
+      transform: translateX(30px) translateY(-20px) scale(1.05);
+      filter: blur(25px) hue-rotate(5deg);
+    }
+    50% { 
+      opacity: 0.7; 
+      transform: translateX(-20px) translateY(30px) scale(0.98);
+      filter: blur(22px) hue-rotate(-5deg);
+    }
+    75% { 
+      opacity: 0.9; 
+      transform: translateX(25px) translateY(25px) scale(1.02);
+      filter: blur(18px) hue-rotate(3deg);
+    }
+  }
+
+  @keyframes wave-slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes ripple-expand {
+    0% { 
+      width: 0; 
+      height: 0; 
+      opacity: 0.8; 
+      border-width: 2px;
+    }
+    100% { 
+      width: 300px; 
+      height: 300px; 
+      opacity: 0; 
+      border-width: 0px;
+    }
   }
 
   @keyframes bubble-rise {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    20% { opacity: 0.6; }
-    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
-  }
-
-  @keyframes wave-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    0% { transform: translateY(0) scale(1) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    50% { transform: translateY(-50vh) scale(1.1) translateX(20px); }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-100vh) scale(1.3) translateX(-10px); opacity: 0; }
   }
 
   @keyframes gradient-shift {
@@ -341,21 +379,67 @@
     overflow: hidden;
   }
 
-  .hero-gradient {
+  /* Deep Ocean Gradient Base */
+  .ocean-gradient-base {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(58, 134, 255, 0.15) 0%, transparent 70%);
-    animation: gradient-shift 15s ease infinite;
-    background-size: 200% 200%;
+    background: radial-gradient(ellipse at 50% 30%, rgba(58, 134, 255, 0.2) 0%, rgba(11, 19, 43, 0.8) 50%, var(--abyss) 100%);
+    animation: ocean-pulse 20s ease-in-out infinite;
   }
 
-  .caustic-overlay {
+  /* Caustic Light Pattern - dappled light through water */
+  .caustic-pattern {
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.1;
-    animation: caustic 8s ease-in-out infinite;
+    background-image: 
+      radial-gradient(ellipse at 20% 30%, rgba(0, 245, 212, 0.15) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 20%, rgba(58, 134, 255, 0.12) 0%, transparent 35%),
+      radial-gradient(ellipse at 40% 70%, rgba(0, 245, 212, 0.1) 0%, transparent 45%),
+      radial-gradient(ellipse at 60% 50%, rgba(58, 134, 255, 0.08) 0%, transparent 30%);
+    filter: blur(20px);
+    animation: caustic-flow 12s ease-in-out infinite;
+    opacity: 0.6;
   }
+
+  /* Layered Animated Waves */
+  .waves-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    animation: wave-slide linear infinite;
+  }
+
+  .waves-1 { animation-duration: 25s; z-index: 1; }
+  .waves-2 { animation-duration: 30s; z-index: 2; animation-direction: reverse; }
+  .waves-3 { animation-duration: 20s; z-index: 3; }
+  .waves-4 { animation-duration: 35s; z-index: 4; animation-direction: reverse; }
+  .waves-5 { animation-duration: 22s; z-index: 5; }
+
+  /* Surface Ripples */
+  .surface-ripples {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .ripple {
+    position: absolute;
+    bottom: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 245, 212, 0.3);
+    animation: ripple-expand 4s ease-out infinite;
+    opacity: 0;
+  }
+
+  .ripple-1 { left: 20%; width: 100px; height: 100px; animation-delay: 0s; }
+  .ripple-2 { left: 50%; width: 150px; height: 150px; animation-delay: 1.5s; }
+  .ripple-3 { left: 80%; width: 120px; height: 120px; animation-delay: 3s; }
 
   .bubble-container {
     position: absolute;
@@ -367,46 +451,10 @@
   .bubble {
     position: absolute;
     bottom: -20px;
-    background: radial-gradient(circle at 30% 30%, rgba(0, 245, 212, 0.4), transparent 70%);
+    background: radial-gradient(circle at 30% 30%, rgba(0, 245, 212, 0.5), rgba(58, 134, 255, 0.2) 40%, transparent 70%);
     border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 245, 212, 0.3);
     animation: bubble-rise linear infinite;
-  }
-
-  .water-surface {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40vh;
-    overflow: hidden;
-  }
-
-  .wave {
-    position: absolute;
-    bottom: 0;
-    left: -50%;
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 245, 212, 0.05) 100%);
-    animation: wave-float 6s ease-in-out infinite;
-  }
-
-  .wave::before,
-  .wave::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,100 300,20 450,60 C600,100 750,20 900,60 C1050,100 1200,20 1200,60 L1200,120 L0,120 Z' fill='rgba(0,245,212,0.08)'/%3E%3C/svg%3E") repeat-x;
-    background-size: 1200px 100px;
-    animation: wave-float 8s ease-in-out infinite;
-  }
-
-  .wave::after {
-    animation-delay: -4s;
-    opacity: 0.5;
   }
 
   .hero-content {
@@ -1209,14 +1257,40 @@
 
 <section class="hero">
   <div class="hero-bg">
-    <div class="hero-gradient"></div>
-    <div class="caustic-overlay"></div>
-    <div class="bubble-container" id="bubbleContainer"></div>
-    <div class="water-surface">
-      <div class="wave"></div>
+    <!-- Deep Ocean Gradient Base -->
+    <div class="ocean-gradient-base"></div>
+    
+    <!-- Caustic Light Pattern (dappled light through water) -->
+    <div class="caustic-pattern"></div>
+    
+    <!-- Layered Animated Waves - 5 distinct layers moving at different speeds -->
+    <svg class="waves-layer waves-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,60 C150,80 350,40 600,60 C850,80 1050,40 1200,60 L1200,120 L0,120 Z" fill="rgba(0,245,212,0.06)"/>
+    </svg>
+    <svg class="waves-layer waves-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,70 C200,50 400,90 600,70 C800,50 1000,90 1200,70 L1200,120 L0,120 Z" fill="rgba(58,134,255,0.08)"/>
+    </svg>
+    <svg class="waves-layer waves-3" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,50 C180,70 380,30 600,50 C820,70 1020,30 1200,50 L1200,120 L0,120 Z" fill="rgba(0,245,212,0.07)"/>
+    </svg>
+    <svg class="waves-layer waves-4" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,80 C220,60 420,100 600,80 C780,60 980,100 1200,80 L1200,120 L0,120 Z" fill="rgba(58,134,255,0.09)"/>
+    </svg>
+    <svg class="waves-layer waves-5" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,40 C160,60 360,20 600,40 C840,60 1040,20 1200,40 L1200,120 L0,120 Z" fill="rgba(0,245,212,0.08)"/>
+    </svg>
+    
+    <!-- Surface Ripples -->
+    <div class="surface-ripples">
+      <div class="ripple ripple-1"></div>
+      <div class="ripple ripple-2"></div>
+      <div class="ripple ripple-3"></div>
     </div>
+    
+    <!-- Rising Bubbles -->
+    <div class="bubble-container" id="bubbleContainer"></div>
   </div>
-
+  
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span class="pulse-dot"></span>
@@ -1257,7 +1331,7 @@
       <span class="stat-label">Projects Completed</span>
     </div>
   </div>
-
+  
   <div class="wave-divider">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path d="M0,60 C150,100 300,20 450,60 C600,100 750,20 900,60 C1050,100 1200,20 1200,60 L1200,120 L0,120 Z"/>
