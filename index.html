@@ -41,7 +41,28 @@
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
 
+  /* ---------- Animations ---------- */
+  .fade-in{opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .fade-in.visible{opacity:1; transform:translateY(0);}
+  
+  .slide-in-left{opacity:0; transform:translateX(-32px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .slide-in-left.visible{opacity:1; transform:translateX(0);}
+  
+  .slide-in-right{opacity:0; transform:translateX(32px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .slide-in-right.visible{opacity:1; transform:translateX(0);}
+  
+  .scale-in{opacity:0; transform:scale(0.96); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .scale-in.visible{opacity:1; transform:scale(1);}
+
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .floating{animation:float 4s ease-in-out infinite;}
+  
+  @keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+  .shimmer{background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size:200% 100%; animation:shimmer 2s infinite;}
+
   /* ---------- Header ---------- */
+  header{transition:background 0.3s ease, box-shadow 0.3s ease;}
+  header.scrolled{background:rgba(241,239,228,0.98); box-shadow:0 4px 20px rgba(18,50,67,0.08);}
   header{
     position:sticky; top:0; z-index:100;
     background:rgba(241,239,228,0.92);
@@ -105,26 +126,32 @@
     display:flex; align-items:center; gap:10px;
   }
   .hero-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--aqua); display:inline-block;}
+  .hero-eyebrow.animate .dot{animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1; transform:scale(1);}50%{opacity:0.6; transform:scale(1.2);}}
   .hero h1{
     font-size:clamp(40px, 6.4vw, 84px);
     line-height:0.98;
     max-width:820px;
     margin-bottom:28px;
+    opacity:0; transform:translateY(24px); animation:fadeInUp 0.8s ease forwards 0.3s;
   }
+  @keyframes fadeInUp{to{opacity:1; transform:translateY(0);}}
   .hero h1 em{font-style:normal; color:var(--aqua);}
   .hero p.lead{
     font-size:18px; max-width:520px; color:#C9DAD9; margin-bottom:36px;
+    opacity:0; transform:translateY(24px); animation:fadeInUp 0.8s ease forwards 0.5s;
   }
-  .hero-actions{display:flex; gap:16px; align-items:center; margin-bottom:64px; flex-wrap:wrap;}
+  .hero-actions{display:flex; gap:16px; align-items:center; margin-bottom:64px; flex-wrap:wrap;
+    opacity:0; transform:translateY(24px); animation:fadeInUp 0.8s ease forwards 0.7s;}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:14px 26px; font-weight:600; font-size:14px; border-radius:2px;
-    border:1px solid transparent; cursor:pointer;
+    border:1px solid transparent; cursor:pointer; transition:all 0.3s ease; position:relative; overflow:hidden;
   }
   .btn-primary{background:var(--aqua); color:var(--ink);}
-  .btn-primary:hover{background:#3fa0a7;}
+  .btn-primary:hover{background:#3fa0a7; transform:translateY(-2px); box-shadow:0 8px 20px rgba(46,140,147,0.35);}
   .btn-ghost{border-color:var(--line); color:var(--paper);}
-  .btn-ghost:hover{border-color:var(--aqua); color:var(--aqua);}
+  .btn-ghost:hover{border-color:var(--aqua); color:var(--aqua); transform:translateY(-2px);}
 
   .hero-strip{
     border-top:1px solid rgba(159,190,190,0.25);
@@ -161,9 +188,9 @@
   }
   .service-card{
     background:var(--paper); padding:30px 26px; min-height:190px;
-    display:flex; flex-direction:column; gap:14px; transition:background 0.2s;
+    display:flex; flex-direction:column; gap:14px; transition:all 0.3s ease;
   }
-  .service-card:hover{background:var(--white);}
+  .service-card:hover{background:var(--white); transform:translateY(-6px); box-shadow:0 12px 30px rgba(18,50,67,0.12);}
   .service-code{
     font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--clay); letter-spacing:0.06em;
   }
@@ -250,7 +277,8 @@
 
   /* ---------- Why choose us ---------- */
   .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
-  .why-card{padding-top:22px; border-top:2px solid var(--ink);}
+  .why-card{padding-top:22px; border-top:2px solid var(--ink); transition:all 0.3s ease;}
+  .why-card:hover{transform:translateY(-4px);}
   .why-card .ic{width:34px; height:34px; margin-bottom:18px; color:var(--aqua-deep);}
   .why-card h3{font-family:'Big Shoulders Display',sans-serif; font-size:20px; font-weight:600; margin-bottom:10px;}
   .why-card p{font-size:14px; color:var(--ink-soft);}
@@ -262,8 +290,9 @@
   @media (max-width:860px){ .project-card.wide{grid-column:span 1;} }
   .project-card{
     background:var(--paper); border:1px solid var(--line); border-radius:3px; padding:28px;
-    display:flex; flex-direction:column; gap:16px;
+    display:flex; flex-direction:column; gap:16px; transition:all 0.3s ease;
   }
+  .project-card:hover{transform:translateY(-4px); box-shadow:0 10px 25px rgba(18,50,67,0.08);}
   .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
   .client-tag{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft); letter-spacing:0.03em;}
   .status{
@@ -366,7 +395,7 @@
 <section class="hero">
   <div class="hero-top" style="background-image:url('https://s7d1.scene7.com/is/image/wbcollab/hero_girlplayingwithwater?qlt=90&hei=630&wid=1200&fit=hfit');">
     <div class="wrap">
-      <div class="hero-eyebrow"><span class="dot"></span> GENERAL WATER CONSULTANCY LICENSE · GRADE ONE · ADDIS ABABA</div>
+      <div class="hero-eyebrow animate"><span class="dot"></span> GENERAL WATER CONSULTANCY LICENSE · GRADE ONE · ADDIS ABABA</div>
       <h1 class="display">Mapping what's<br>under the ground,<br>for what's built <em>above it.</em></h1>
       <p class="lead">Milto Engineering PLC is a specialized consulting firm in water resources development and environment — study, design, construction supervision and training, from first borehole to final handover.</p>
       <div class="hero-actions">
@@ -389,9 +418,9 @@
   </div>
 </section>
 
-<section class="services" id="services">
+<section class="services fade-in" id="services">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head slide-in-left">
       <div class="eyebrow">Sheet 01 — Capabilities</div>
       <h2>Major fields of service.</h2>
       <p>Study, design, construction supervision and training across water resources, geosciences and environmental management.</p>
@@ -399,79 +428,79 @@
   </div>
   <div class="wrap" style="padding:0;">
     <div class="service-grid">
-      <button class="service-card photo" data-service="wr01" style="background-image:url('https://chandradaya-investasi.com/_next/image?url=https%3A%2F%2Fchandradaya-investasi.com%2Ffile-storage%2FcitVNDg4cm5EdWpjQW9GNzRTREFPKzVkY3dwQlljT3NKQmVweWpEbHB6OXhWRmc2K1Vta2Q1c2lQK2VXaVhlSDlmZDFHT0tERTFET0F1bU10M0YyNEE9PQ&w=3840&q=75');">
+      <button class="service-card photo scale-in" data-service="wr01" style="background-image:url('https://chandradaya-investasi.com/_next/image?url=https%3A%2F%2Fchandradaya-investasi.com%2Ffile-storage%2FcitVNDg4cm5EdWpjQW9GNzRTREFPKzVkY3dwQlljT3NKQmVweWpEbHB6OXhWRmc2K1Vta2Q1c2lQK2VXaVhlSDlmZDFHT0tERTFET0F1bU10M0YyNEE9PQ&w=3840&q=75');">
         <span class="service-code">WR — 01</span>
         <h3>Water Resources Assessment &amp; Management</h3>
         <p>Development and management of groundwater and surface water resources.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="ws02" style="background-image:url('https://msconsultancyet.com/wp-content/uploads/2024/01/photo.jpg');">
+      <button class="service-card photo scale-in" data-service="ws02" style="background-image:url('https://msconsultancyet.com/wp-content/uploads/2024/01/photo.jpg');">
         <span class="service-code">WS — 02</span>
         <h3>Water Supply &amp; Sanitation</h3>
         <p>Town and rural water supply design through to sanitation systems.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="gw03" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-k7xjCCb1TwUD2q--v3magKgN8-Xlo8b6y70VvovYQDTMBcq1k6AvTFCV&s=10');">
+      <button class="service-card photo scale-in" data-service="gw03" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-k7xjCCb1TwUD2q--v3magKgN8-Xlo8b6y70VvovYQDTMBcq1k6AvTFCV&s=10');">
         <span class="service-code">GW — 03</span>
         <h3>Groundwater Development &amp; Monitoring</h3>
         <p>Wellfield development, yield testing and long-term monitoring.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="hg04" style="background-image:url('https://www.researchgate.net/publication/393613451/figure/fig3/AS:11431281625003001@1757253471393/Geological-and-hydrogeological-map-of-the-study-area.png');">
+      <button class="service-card photo scale-in" data-service="hg04" style="background-image:url('https://www.researchgate.net/publication/393613451/figure/fig3/AS:11431281625003001@1757253471393/Geological-and-hydrogeological-map-of-the-study-area.png');">
         <span class="service-code">HG — 04</span>
         <h3>Geological &amp; Hydrogeological Mapping</h3>
         <p>Aquifer delineation and subsurface mapping for water development.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="gp05" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbegWqv8YijK7-T7AMp1fGpGAqxY25AHnvfQLn8ZyLDFVqLDYWendXzMoI&s=10');">
+      <button class="service-card photo scale-in" data-service="gp05" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbegWqv8YijK7-T7AMp1fGpGAqxY25AHnvfQLn8ZyLDFVqLDYWendXzMoI&s=10');">
         <span class="service-code">GP — 05</span>
         <h3>Geophysical Investigations</h3>
         <p>VES, ERT, magnetic, gravity and seismic surveys ahead of drilling.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="gt06" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR32YZSRzhSZ9IeacRBCrVfuwtYCTdA21OWZxXaqQu_qGVArMeTZZg49mA&s=10');">
+      <button class="service-card photo scale-in" data-service="gt06" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR32YZSRzhSZ9IeacRBCrVfuwtYCTdA21OWZxXaqQu_qGVArMeTZZg49mA&s=10');">
         <span class="service-code">GT — 06</span>
         <h3>Geotechnical Investigations</h3>
         <p>Subsurface exploration, foundation design and earthworks planning.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="id07" style="background-image:url('https://cdn.britannica.com/70/156670-050-7E37C3D6/Irrigation-canal-farm-field.jpg');">
+      <button class="service-card photo scale-in" data-service="id07" style="background-image:url('https://cdn.britannica.com/70/156670-050-7E37C3D6/Irrigation-canal-farm-field.jpg');">
         <span class="service-code">ID — 07</span>
         <h3>Irrigation &amp; Drainage Engineering</h3>
         <p>Scheme design for agricultural water management.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="ww08" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu2Lj5DtkFn_EEdeDgpYyBDKwqV2QGWZKkUbzGhVAwrm1AFbQAijowiPM&s=10');">
+      <button class="service-card photo scale-in" data-service="ww08" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu2Lj5DtkFn_EEdeDgpYyBDKwqV2QGWZKkUbzGhVAwrm1AFbQAijowiPM&s=10');">
         <span class="service-code">WW — 08</span>
         <h3>Waste Water Treatment System Design</h3>
         <p>Treatment system design suited to site and load conditions.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="dw09" style="background-image:url('https://www.khansahebsykes.com/wp-content/uploads/sites/9/2026/06/Wellpoint-Dewatering-Installation.webp');">
+      <button class="service-card photo scale-in" data-service="dw09" style="background-image:url('https://www.khansahebsykes.com/wp-content/uploads/sites/9/2026/06/Wellpoint-Dewatering-Installation.webp');">
         <span class="service-code">DW — 09</span>
         <h3>Dewatering &amp; Groundwater Management for Excavations</h3>
         <p>Dewatering investigations for safe, dry excavation works.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="bh10" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQoaeh9O4Uak2n9EGAEYhzINJVRF_ZPY8oTG4GPfkZae9rUKjFDPrNO6MY&s=10');">
+      <button class="service-card photo scale-in" data-service="bh10" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQoaeh9O4Uak2n9EGAEYhzINJVRF_ZPY8oTG4GPfkZae9rUKjFDPrNO6MY&s=10');">
         <span class="service-code">BH — 10</span>
         <h3>Borehole Geophysical Logging &amp; Camera Investigations</h3>
         <p>Downhole logging and visual inspection of borehole conditions.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="ei11" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBStT9kMhIdZqltleQ5gDHxBHxBxWHjskWUdTMp1grn4mRlhcPBgqJOo&s=10');">
+      <button class="service-card photo scale-in" data-service="ei11" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBStT9kMhIdZqltleQ5gDHxBHxBxWHjskWUdTMp1grn4mRlhcPBgqJOo&s=10');">
         <span class="service-code">EI — 11</span>
         <h3>Environmental Impact Assessment &amp; Management</h3>
         <p>EIA, mitigation planning, compliance monitoring, stakeholder engagement.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo" data-service="cs12" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjjlWTYUV0NTdx3HOm4Ollxx9POQIz4Q9B2zgOqNPpqc-0Dzci8aIW4kA&s=10');">
+      <button class="service-card photo scale-in" data-service="cs12" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjjlWTYUV0NTdx3HOm4Ollxx9POQIz4Q9B2zgOqNPpqc-0Dzci8aIW4kA&s=10');">
         <span class="service-code">CS — 12</span>
         <h3>Construction Supervision &amp; Contract Administration</h3>
         <p>On-site supervision and contract administration of water supply works.</p>
         <span class="read-more">Read more →</span>
       </button>
-      <button class="service-card photo wide" data-service="gis13" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9dSNFlVv87yepAmQCLwq1i4m2GTREjpkriBgdop3SUg&s=10');">
+      <button class="service-card photo wide scale-in" data-service="gis13" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9dSNFlVv87yepAmQCLwq1i4m2GTREjpkriBgdop3SUg&s=10');">
         <span class="service-code">GIS — 13</span>
         <h3>GIS &amp; Remote Sensing Services</h3>
         <p>Spatial analysis, mapping and satellite-imagery interpretation.</p>
@@ -490,29 +519,29 @@
   </div>
 </div>
 
-<section class="strata">
+<section class="strata fade-in">
   <div class="wrap">
-    <div class="strata-copy">
+    <div class="strata-copy slide-in-left">
       <div class="eyebrow">Sheet 02 — Method</div>
       <h2 class="display">We read the ground before we design for it.</h2>
       <p>Every water supply or drilling project starts below the surface. Our hydrogeological cross-sections map aquifer type, groundwater flow direction and static water level along the full profile — the evidence base for every recommendation we make.</p>
       <p>Borehole geophysical logging, camera investigations and topographic survey feed directly into this picture before a single well is sited.</p>
     </div>
-    <figure class="strata-fig">
+    <figure class="strata-fig slide-in-right">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeIAAAFQCAMAAABUNY3vAAAA/1BMVEVe1WBkqWWcaQhqbWuirtTX5empzNs2lTeVoKG01adyUA93l5Y8n0clrNzF5bKJmHFFmDtetNSUa1dtc41vx+DUmd1cNgrJd9WfZ5TYpJ8rNnUIY+PeH60vLSs0cjQZU5wsW1i2csvMZWHVER0wnZDKXp2DynqhPXGPiDnyGcquNo/KiHJ2yoI9yGpEecT+/v5Ut1Tq6upn2GhOqE9WxVfW19aoqKm3uLeXmJdlyGfGx8dp42pZ11lLmUuHh4inuuQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApvN8EAAAAQHRSTlP/////////////////////////////////////////////////////////////////////////////////////73leyQAARjhJREFUeNrtfQtD27qyroXixEB2k0LbRffq6lp73f0+515btmXJTuz+/3915xvJrxAgQKA8rFIU27IS8nlGM6N5BPGgqam9wRYMEK4aO7W314YQmyqe2ttrI4j19H1MEE9tgnhqE8RTmyCe2gTx1CaIpzZBPEE8tQni+7TwhtdTezMQz294PbV3CPFE468G4vA+EM8nGn99EIfz8ZHqD2bXCXUeThC/cojn5z2G4fl8gvjtQXyXRD2EWE1wvEqI7xjcE/Z1Gp/krxcK8fz8gbLZAGEzce5XpDQ9qM0miN86xNEE8bug4nCSv14ZxFrz9IfANj/HqPDjBM/rgliaolBaVfT/JmQfJJRP7bkhDm9SdaRtCGTbNEbecMP8fhNO7adDvIOY1FI3RdPYeIL4jUJsY1XYoihMXNx1w3yC+CVDPL+DKG9+Jnrz1j6IJ6BfDMTRbD/EN0I078Z9Cvfd6a/PJqxeHBXv2Jznd0O8f+wE8ctVmubhQRDvYd2z+Q3WkKm9ZL34AIg7ffljuAf2CasXDvEea0Z4O9nvXDt/yEMztWeE+BCIboN4j7g2QfzCGHX4SIh90xPELxbiFqLwcRAPbppNG1EvEuIexnAXon3ee7dAvFfuntrPgHhsgBxAfK5uHRnf5c43mwxeLxzieyla7STq40S6Lx3ie0F0HeL7PSJTex6Ix6CE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" alt="Hydrogeological cross-section prepared by Milto Engineering showing aquifer strata, groundwater flow direction and static water level along a survey profile">
       <figcaption>FIG. WR-H10 — HYDROGEOLOGICAL CROSS-SECTION, AWASH-AI VALLEY WELLFIELD</figcaption>
     </figure>
   </div>
 </section>
 
-<section>
+<section class="fade-in">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head slide-in-left">
       <div class="eyebrow">Sheet 03 — Standards</div>
       <h2>Why clients choose us.</h2>
     </div>
     <div class="why-grid">
-      <div class="why-card">
+      <div class="why-card scale-in">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="17" cy="12.5" r="4.5"/>
           <path d="M9 27 C9 20.5 12.5 17 17 17 C21.5 17 25 20.5 25 27" stroke-linecap="round"/>
@@ -523,7 +552,7 @@
         <h3>Professional integrity</h3>
         <p>Devotion to professional integrity and principles of ethics on every engagement, public or private.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card scale-in">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M11 30 C11 24.5 13.5 21.5 17 21.5 C20.5 21.5 23 24.5 23 30" stroke-linecap="round"/>
           <circle cx="17" cy="18" r="3.2"/>
@@ -532,7 +561,7 @@
         <h3>Client satisfaction</h3>
         <p>Long-term partnership built on quality delivered within agreed timeframes and cost.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card scale-in">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M3 16 L9 12 L14 16 L11 19 L15 23 L18 20 L23 24 L26 21 L31 16" stroke-linejoin="round" stroke-linecap="round"/>
           <path d="M9 12 L13 8 L18 8 L14 13" stroke-linejoin="round" stroke-linecap="round"/>
@@ -545,14 +574,14 @@
   </div>
 </section>
 
-<section class="projects" id="projects">
+<section class="projects fade-in" id="projects">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head slide-in-left">
       <div class="eyebrow">Sheet 04 — Field record</div>
       <h2>Selected projects.</h2>
       <p>A sample of completed engagements across geophysical investigation, drilling supervision and wellfield development.</p>
     </div>
-    <div class="clients-strip">
+    <div class="clients-strip fade-in">
       <span>Ethiopian Airlines</span>
       <span>Tsedey Bank S.C.</span>
       <span>IREC</span>
@@ -680,15 +709,15 @@
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="fade-in">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head slide-in-left">
       <div class="eyebrow">Sheet 05 — Who we are</div>
       <h2>Mission, vision, values.</h2>
       <p>Milto Engineering PLC is a grade-one water resources and related-fields consulting firm, established in August 2021 by experienced and energetic professionals.</p>
     </div>
     <div class="mvv-grid">
-      <div class="mvv-card dark">
+      <div class="mvv-card dark scale-in">
         <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="15.5" cy="17.5" r="11"/>
           <circle cx="15.5" cy="17.5" r="6.5"/>
@@ -699,7 +728,7 @@
         <div class="eyebrow mono">MISSION</div>
         <p>To provide professional service in study, design, contract administration and construction supervision of projects to the highest standards of quality, within the agreed timeframe and at reasonable prices — through long-term partnership to the satisfaction of clients, employees, the public and the environment at large.</p>
       </div>
-      <div class="mvv-card">
+      <div class="mvv-card scale-in">
         <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M4 30 L13 15 L18 22 L22 16 L30 30 Z" stroke-linejoin="round"/>
           <circle cx="14" cy="9" r="2.6"/>
@@ -708,7 +737,7 @@
         <div class="eyebrow">VISION</div>
         <p>Milto Engineering PLC aspires to be a center of excellence in providing technical consulting services in Ethiopia.</p>
       </div>
-      <div class="mvv-card dark">
+      <div class="mvv-card dark scale-in">
         <svg class="mvv-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M9 13 L17 4 L25 13 L17 30 Z" stroke-linejoin="round" stroke-linecap="round"/>
           <path d="M9 13 L25 13" stroke-linecap="round"/>
@@ -728,9 +757,9 @@
   </div>
 </section>
 
-<section class="cta-band" id="contact">
+<section class="cta-band fade-in" id="contact">
   <div class="wrap">
-    <h2 class="display">Have a site that needs reading?</h2>
+    <h2 class="display floating">Have a site that needs reading?</h2>
     <p>Send us your scope — study, design, drilling supervision or investigation — and we'll respond with next steps.</p>
     <a href="mailto:admin@miltoengineering.com" class="btn btn-primary">admin@miltoengineering.com</a>
   </div>
@@ -930,6 +959,50 @@ function closeModal(){
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Header scroll effect
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Intersection Observer for scroll animations
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.12
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observe all animated elements
+document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+  observer.observe(el);
+});
+
+// Animate hero stats on load
+document.addEventListener('DOMContentLoaded', () => {
+  const heroStats = document.querySelectorAll('.hero-strip div');
+  heroStats.forEach((stat, index) => {
+    stat.style.opacity = '0';
+    stat.style.transform = 'translateY(16px)';
+    stat.style.transition = `opacity 0.5s ease ${0.3 + index * 0.1}s, transform 0.5s ease ${0.3 + index * 0.1}s`;
+    setTimeout(() => {
+      stat.style.opacity = '1';
+      stat.style.transform = 'translateY(0)';
+    }, 100 + index * 80);
+  });
+});
 </script>
 
 </body>
