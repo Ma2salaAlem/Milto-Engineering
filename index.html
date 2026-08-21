@@ -715,6 +715,22 @@
     overflow: hidden;
     transition: all 0.5s var(--easing-fluid);
     cursor: pointer;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11, 19, 43, 0.7) 0%, rgba(11, 19, 43, 0.95) 100%);
+    z-index: 0;
+    transition: opacity 0.5s var(--easing-fluid);
+  }
+
+  .service-card > * {
+    position: relative;
+    z-index: 1;
   }
 
   .service-card::before {
@@ -724,9 +740,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 245, 212, 0.1), transparent 50%);
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 245, 212, 0.15), transparent 50%);
     opacity: 0;
     transition: opacity 0.3s var(--easing-fluid);
+    z-index: 2;
+    pointer-events: none;
   }
 
   .service-card:hover::before {
@@ -1351,70 +1369,70 @@
     </div>
 
     <div class="services-grid">
-      <div class="service-card reveal stagger-1" data-service="wr01">
+      <div class="service-card reveal stagger-1" data-service="wr01" style="background-image: url('https://chandradaya-investasi.com/next/image?url=https%3A%2F%2Fchandradaya-investasi.com%2Ffile-storage%2FcitVNDg4cm5EdWpjQW9GNzRTREFPKzVkY3dwQlljT3NKQmVweWpEbHB6OXhWRmc2K1Vta2Q1c2lQK2VXaVhlSDlmZDFHT0tERTFET0F1bU10M0YyNEE9PQ&w=3840&q=75');">
         <span class="service-code">WR — 01</span>
         <h3>Water Resources Assessment & Management</h3>
         <p>Development and management of groundwater and surface water resources.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-2" data-service="ws02">
+      <div class="service-card reveal stagger-2" data-service="ws02" style="background-image: url('https://msconsultancyet.com/wp-content/uploads/2024/01/photo.jpg');">
         <span class="service-code">WS — 02</span>
         <h3>Water Supply & Sanitation</h3>
         <p>Town and rural water supply design through to sanitation systems.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-3" data-service="gw03">
+      <div class="service-card reveal stagger-3" data-service="gw03" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-k7xjCCb1TwUD2q--v3magKgN8-Xlo8b6y70VvovYQDTMBcq1k6AvTFCV&s=10');">
         <span class="service-code">GW — 03</span>
         <h3>Groundwater Development & Monitoring</h3>
         <p>Wellfield development, yield testing and long-term monitoring.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-1" data-service="hg04">
+      <div class="service-card reveal stagger-1" data-service="hg04" style="background-image: url('https://www.researchgate.net/publication/393613451/figure/fig3/AS:11431281625003001@1757253471393/Geological-and-hydrogeological-map-of-the-study-area.png');">
         <span class="service-code">HG — 04</span>
         <h3>Geological & Hydrogeological Mapping</h3>
         <p>Aquifer delineation and subsurface mapping for water development.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-2" data-service="gp05">
+      <div class="service-card reveal stagger-2" data-service="gp05" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbegWqv8YijK7-T7AMp1fGpGAqxY25AHnvfQLn8ZyLDFVqLDYWendXzMoI&s=10');">
         <span class="service-code">GP — 05</span>
         <h3>Geophysical Investigations</h3>
         <p>VES, ERT, magnetic, gravity and seismic surveys ahead of drilling.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-3" data-service="gt06">
+      <div class="service-card reveal stagger-3" data-service="gt06" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsOwdn68vo5qYvw652THeulcoFuyZFSAhzWQm6CaHnUstb_eDDiv9Tm6U&s=10');">
         <span class="service-code">GT — 06</span>
         <h3>Geotechnical Investigations</h3>
         <p>Subsurface exploration, foundation design and earthworks planning.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-1" data-service="id07">
+      <div class="service-card reveal stagger-1" data-service="id07" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKriHh1v0VYwdN9bTB9LIt30s_aBZr-PGxwOwycXt5dbb00jioJnRWnz&s=10');">
         <span class="service-code">ID — 07</span>
         <h3>Irrigation & Drainage Engineering</h3>
         <p>Scheme design for agricultural water management.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-2" data-service="ww08">
+      <div class="service-card reveal stagger-2" data-service="ww08" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsOwdn68vo5qYvw652THeulcoFuyZFSAhzWQm6CaHnUstb_eDDiv9Tm6U&s=10');">
         <span class="service-code">WW — 08</span>
         <h3>Waste Water Treatment System Design</h3>
         <p>Treatment system design suited to site and load conditions.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-3" data-service="dw09">
+      <div class="service-card reveal stagger-3" data-service="dw09" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9dSNFlVv87yepAmQCLwq1i4m2GTREjpkriBgdop3SUg&s=10');">
         <span class="service-code">DW — 09</span>
         <h3>Dewatering & Groundwater Management</h3>
         <p>Dewatering investigations for safe, dry excavation works.</p>
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card featured reveal stagger-1" data-service="gis13">
+      <div class="service-card featured reveal stagger-1" data-service="gis13" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9dSNFlVv87yepAmQCLwq1i4m2GTREjpkriBgdop3SUg&s=10');">
         <span class="service-code">GIS — 13</span>
         <h3>GIS & Remote Sensing Services</h3>
         <p>Spatial analysis, mapping and satellite-imagery interpretation for comprehensive environmental and water resource planning.</p>
@@ -1436,17 +1454,17 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://images.unsplash.com/photo-1581093588402-fb8875dcf4a9?w=800&h=500&fit=crop" alt="Water infrastructure project">
+        <img src="https://w7.pngwing.com/pngs/575/201/png-transparent-addis-ababa-bole-international-airport-ethiopian-airlines-direct-flight-travel-text-logo-flight-thumbnail.png" alt="Ethiopian Airlines logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
       </div>
       <div class="project-info">
-        <span class="project-client">Ethiopian Water Works</span>
-        <h3 class="project-title">Town Water Supply Expansion</h3>
+        <span class="project-client">Ethiopian Airlines</span>
+        <h3 class="project-title">Airport Water Supply & Wastewater Treatment System</h3>
         <div class="project-location">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
             <circle cx="12" cy="9" r="2.4"/>
           </svg>
-          Oromia Region, Ethiopia
+          Addis Ababa, Ethiopia
         </div>
         <span class="project-status status-completed">Completed</span>
       </div>
@@ -1454,11 +1472,83 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://images.unsplash.com/photo-1518116346481-6a1b880bc9e2?w=800&h=500&fit=crop" alt="Hydrogeological survey">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_MdzIl5rwVCIMdWA3JvCbKAb9RRH3hgd-WIWt95MvQ&s=10" alt="Tsedey Bank logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
       </div>
       <div class="project-info">
-        <span class="project-client">Expertise France Partnership</span>
-        <h3 class="project-title">Hydrogeological Cross-Section Mapping</h3>
+        <span class="project-client">Tsedey Bank S.C.</span>
+        <h3 class="project-title">Headquarters Geotechnical Investigation & Foundation Design</h3>
+        <div class="project-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
+            <circle cx="12" cy="9" r="2.4"/>
+          </svg>
+          Addis Ababa, Ethiopia
+        </div>
+        <span class="project-status status-completed">Completed</span>
+      </div>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJRSa6OHYLnn_Cd_Tx1i6F2va5lURYlEVWHnGOVUnQQ&s=10" alt="IREC logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+      </div>
+      <div class="project-info">
+        <span class="project-client">IREC</span>
+        <h3 class="project-title">Regional Irrigation Scheme Feasibility Study</h3>
+        <div class="project-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
+            <circle cx="12" cy="9" r="2.4"/>
+          </svg>
+          Ethiopia
+        </div>
+        <span class="project-status status-completed">Completed</span>
+      </div>
+    </div>
+
+    <div class="project-showcase reverse reveal">
+      <div class="project-image">
+        <img src="https://cdn.imweb.me/upload/S2023082175cb66548ec88/d889605fc3661.png" alt="Team & Team International logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+      </div>
+      <div class="project-info">
+        <span class="project-client">Team & Team International</span>
+        <h3 class="project-title">Commercial Complex Hydrogeological Assessment</h3>
+        <div class="project-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
+            <circle cx="12" cy="9" r="2.4"/>
+          </svg>
+          Addis Ababa, Ethiopia
+        </div>
+        <span class="project-status status-completed">Completed</span>
+      </div>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3la9OhFlFuMDkVy0wKQtChW-DvPRkP1VoVVZSUpgHAJEj4bc96ZDdjp0&s=10" alt="MIDROC Investment Group logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+      </div>
+      <div class="project-info">
+        <span class="project-client">MIDROC Investment Group</span>
+        <h3 class="project-title">Industrial Park Water Resources Development</h3>
+        <div class="project-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
+            <circle cx="12" cy="9" r="2.4"/>
+          </svg>
+          Ethiopia
+        </div>
+        <span class="project-status status-ongoing">Ongoing</span>
+      </div>
+    </div>
+
+    <div class="project-showcase reverse reveal">
+      <div class="project-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQZ_TRFy7H7flMqUwXOzpa4EKiG8l9O-HQVvgbFR3r5fBOfEYrfNM8OS3c&s=10" alt="International Medical Corps logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+      </div>
+      <div class="project-info">
+        <span class="project-client">International Medical Corps</span>
+        <h3 class="project-title">Healthcare Facility Water Supply & Sanitation Systems</h3>
         <div class="project-location">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
@@ -1472,19 +1562,19 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://images.unsplash.com/photo-1574689049597-7e6df3ef2bbc?w=800&h=500&fit=crop" alt="Irrigation system">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclJSLB8PWspsMVAESPJSAO2rlsL-liGfThswXDMJD5A&s=10" alt="ChildFund Ethiopia logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
       </div>
       <div class="project-info">
-        <span class="project-client">Ministry of Agriculture</span>
-        <h3 class="project-title">Large-Scale Irrigation Scheme</h3>
+        <span class="project-client">ChildFund Ethiopia</span>
+        <h3 class="project-title">Rural Community Water Access & Hygiene Program</h3>
         <div class="project-location">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/>
             <circle cx="12" cy="9" r="2.4"/>
           </svg>
-          Amhara Region, Ethiopia
+          Rural Ethiopia
         </div>
-        <span class="project-status status-ongoing">Ongoing</span>
+        <span class="project-status status-completed">Completed</span>
       </div>
     </div>
   </div>
