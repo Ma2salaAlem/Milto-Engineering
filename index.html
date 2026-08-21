@@ -702,8 +702,20 @@
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .service-card {
@@ -806,8 +818,20 @@
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ---------- Projects Section ---------- */
@@ -847,15 +871,15 @@
   }
 
   .project-image img {
-    max-width: 180px;
-    max-height: 120px;
+    max-width: 200px;
+    max-height: 140px;
     width: auto;
     height: auto;
     object-fit: contain;
     transition: transform 0.8s var(--easing-fluid);
     background: #FFFFFF;
     border-radius: 4px;
-    padding: 24px;
+    padding: 32px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
@@ -1352,10 +1376,6 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
-
     .footer-grid {
       grid-template-columns: 1fr 1fr;
     }
@@ -1495,7 +1515,7 @@
     </div>
 
     <div class="services-grid">
-      <div class="service-card reveal stagger-1" data-service="wr01" style="background-image: url('https://chandradaya-investasi.com/next/image?url=https%3A%2F%2Fchandradaya-investasi.com%2Ffile-storage%2FcitVNDg4cm5EdWpjQW9GNzRTREFPKzVkY3dwQlljT3NKQmVweWpEbHB6OXhWRmc2K1Vta2Q1c2lQK2VXaVhlSDlmZDFHT0tERTFET0F1bU10M0YyNEE9PQ&w=3840&q=75');">
+      <div class="service-card reveal stagger-1" data-service="wr01" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRdP07k0JZ4vValxDuE1sK3WNxXsy_kfmYdoxxIv_6Aw&s=10');">
         <span class="service-code">WR — 01</span>
         <h3>Water Resources Assessment & Management</h3>
         <p>Development and management of groundwater and surface water resources.</p>
@@ -1537,7 +1557,7 @@
         <span class="service-link">Read More →</span>
       </div>
 
-      <div class="service-card reveal stagger-1" data-service="id07" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKriHh1v0VYwdN9bTB9LIt30s_aBZr-PGxwOwycXt5dbb00jioJnRWnz&s=10');">
+      <div class="service-card reveal stagger-1" data-service="id07" style="background-image: url('https://cdn.britannica.com/70/156670-050-7E37C3D6/Irrigation-canal-farm-field.jpg');">
         <span class="service-code">ID — 07</span>
         <h3>Irrigation & Drainage Engineering</h3>
         <p>Scheme design for agricultural water management.</p>
@@ -1659,7 +1679,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://w7.pngwing.com/pngs/575/201/png-transparent-addis-ababa-bole-international-airport-ethiopian-airlines-direct-flight-travel-text-logo-flight-thumbnail.png" alt="Ethiopian Airlines logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx1LeQOBk0b2pUuI7MGqINMprN_Kr_nibP0MoQm_8I1Q&s=10" alt="Ethiopian Airlines logo">
       </div>
       <div class="project-info">
         <span class="project-client">Ethiopian Airlines</span>
@@ -1677,7 +1697,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_MdzIl5rwVCIMdWA3JvCbKAb9RRH3hgd-WIWt95MvQ&s=10" alt="Tsedey Bank logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg3neQnTIKdvnEjhQ8LhhAPfK39trGsII0xY5cA2FzyhPXxWSRrs6NyHw5&s=10" alt="Tsedey Bank logo">
       </div>
       <div class="project-info">
         <span class="project-client">Tsedey Bank S.C.</span>
@@ -1695,7 +1715,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJRSa6OHYLnn_Cd_Tx1i6F2va5lURYlEVWHnGOVUnQQ&s=10" alt="IREC logo">
+        <img src="https://www.advagen.eu/wp-content/uploads/2022/12/Logo_IREC.png" alt="IREC logo">
       </div>
       <div class="project-info">
         <span class="project-client">IREC</span>
@@ -1713,7 +1733,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://cdn.imweb.me/upload/S2023082175cb66548ec88/d889605fc3661.png" alt="Team & Team International logo">
+        <img src="https://cdn.imweb.me/thumbnail/20251204/030b7df6dd3e0.jpg" alt="Team & Team International logo">
       </div>
       <div class="project-info">
         <span class="project-client">Team & Team International</span>
@@ -1731,7 +1751,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3la9OhFlFuMDkVy0wKQtChW-DvPRkP1VoVVZSUpgHAJEj4bc96ZDdjp0&s=10" alt="MIDROC Investment Group logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpBZgFKqCc1mAzcGkDmcXlypmFPMEyIpLLq95bC4WmTg&s" alt="MIDROC Investment Group logo">
       </div>
       <div class="project-info">
         <span class="project-client">MIDROC Investment Group</span>
@@ -1749,7 +1769,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQZ_TRFy7H7flMqUwXOzpa4EKiG8l9O-HQVvgbFR3r5fBOfEYrfNM8OS3c&s=10" alt="International Medical Corps logo">
+        <img src="https://cdn1.internationalmedicalcorps.org/wp-content/uploads/2025/07/YEM_Water-Trucking-_-Bani-Mansour-Hospital-_-23-October2024.jpg" alt="International Medical Corps logo">
       </div>
       <div class="project-info">
         <span class="project-client">International Medical Corps</span>
@@ -1767,7 +1787,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclJSLB8PWspsMVAESPJSAO2rlsL-liGfThswXDMJD5A&s=10" alt="ChildFund Ethiopia logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZS5iRAeGPH7HwHR9MCgOP_-Tlkrliv3tsHbUlwRLUSqNcvd_ZuVUDixw&s=10" alt="ChildFund Ethiopia logo">
       </div>
       <div class="project-info">
         <span class="project-client">ChildFund Ethiopia</span>
