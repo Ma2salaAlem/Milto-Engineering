@@ -702,21 +702,22 @@
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
   }
 
   .service-card {
     background: rgba(11, 19, 43, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 245, 212, 0.1);
-    padding: 40px 32px;
+    padding: 28px 24px;
     position: relative;
     overflow: hidden;
     transition: all 0.5s var(--easing-fluid);
     cursor: pointer;
     background-size: cover;
     background-position: center;
+    min-height: 220px;
   }
 
   .service-card::after {
@@ -767,15 +768,15 @@
   }
 
   .service-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--arctic-white);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .service-card p {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     color: var(--mist-gray);
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   .service-link {
@@ -799,8 +800,14 @@
   }
 
   .service-card.featured {
-    grid-column: span 2;
+    grid-column: 1 / -1;
     background: linear-gradient(135deg, rgba(0, 245, 212, 0.1), rgba(58, 134, 255, 0.05));
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
   }
 
   /* ---------- Projects Section ---------- */
@@ -833,13 +840,23 @@
     overflow: hidden;
     border-radius: 4px;
     aspect-ratio: 16/10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ocean);
   }
 
   .project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 180px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     transition: transform 0.8s var(--easing-fluid);
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
   .project-image::before {
@@ -906,6 +923,115 @@
   .status-ongoing {
     background: rgba(255, 107, 53, 0.15);
     color: #FF6B35;
+  }
+
+  /* ---------- Methodology Section ---------- */
+  .methodology {
+    background: var(--deep-navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-flow {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .process-step {
+    flex: 1;
+    background: rgba(11, 19, 43, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 245, 212, 0.1);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.5s var(--easing-fluid);
+    position: relative;
+  }
+
+  .process-step:hover {
+    border-color: var(--cyan-glow);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .step-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--cyan-glow);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    color: var(--cyan-glow);
+    stroke-width: 1.5;
+  }
+
+  .process-step h3 {
+    font-size: 1.1rem;
+    color: var(--arctic-white);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .process-step p {
+    font-size: 0.85rem;
+    color: var(--mist-gray);
+    line-height: 1.6;
+  }
+
+  .process-connector {
+    width: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .process-connector::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan-glow), var(--water-blue));
+    opacity: 0.3;
+  }
+
+  .process-connector::after {
+    content: '→';
+    color: var(--cyan-glow);
+    font-size: 1.2rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 1024px) {
+    .process-flow {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .process-connector {
+      width: 100%;
+      height: 40px;
+    }
+
+    .process-connector::before {
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--cyan-glow), var(--water-blue));
+    }
+
+    .process-connector::after {
+      content: '↓';
+    }
   }
 
   /* ---------- About Section ---------- */
@@ -1442,10 +1568,89 @@
   </div>
 </section>
 
+<section class="methodology" id="methodology">
+  <div class="wave-divider top"></div>
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-label">Sheet 03 — Process</span>
+      <h2 class="section-title">The Milto Process</h2>
+      <p class="section-description">
+        Precision engineering from initial study through final handover — a proven methodology 
+        delivering reliable water solutions across Ethiopia.
+      </p>
+    </div>
+
+    <div class="process-flow">
+      <div class="process-step reveal stagger-1">
+        <div class="step-number">01</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="M24 12 L24 24 L32 28"/>
+            <path d="M12 24 Q24 18 36 24"/>
+          </svg>
+        </div>
+        <h3>Study & Investigation</h3>
+        <p>Comprehensive data collection, hydrogeological surveys, and technical analysis to understand site conditions and water resource potential.</p>
+      </div>
+
+      <div class="process-connector"></div>
+
+      <div class="process-step reveal stagger-2">
+        <div class="step-number">02</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="8" y="12" width="32" height="24" rx="2"/>
+            <path d="M16 12 L16 8 L32 8 L32 12"/>
+            <path d="M14 20 L20 26 L28 18"/>
+          </svg>
+        </div>
+        <h3>Design & Planning</h3>
+        <p>Engineered solutions with detailed specifications, drawings, and cost estimates tailored to project requirements and regulatory standards.</p>
+      </div>
+
+      <div class="process-connector"></div>
+
+      <div class="process-step reveal stagger-3">
+        <div class="step-number">03</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 36 L20 20 L28 28 L36 12"/>
+            <circle cx="20" cy="20" r="4"/>
+            <circle cx="28" cy="28" r="4"/>
+            <circle cx="36" cy="12" r="4"/>
+          </svg>
+        </div>
+        <h3>Construction Supervision</h3>
+        <p>On-site oversight, quality control, and contract administration ensuring implementation meets design specifications and safety standards.</p>
+      </div>
+
+      <div class="process-connector"></div>
+
+      <div class="process-step reveal stagger-4">
+        <div class="step-number">04</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 24 L22 30 L32 18"/>
+            <circle cx="24" cy="24" r="16"/>
+            <path d="M24 8 L24 14"/>
+            <path d="M24 34 L24 40"/>
+            <path d="M8 24 L14 24"/>
+            <path d="M34 24 L40 24"/>
+          </svg>
+        </div>
+        <h3>Training & Handover</h3>
+        <p>Knowledge transfer, operational training, and systematic handover ensuring long-term sustainability and client self-sufficiency.</p>
+      </div>
+    </div>
+  </div>
+  <div class="wave-divider bottom"></div>
+</section>
+
 <section class="projects" id="projects">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-label">Sheet 03 — Portfolio</span>
+      <span class="section-label">Sheet 04 — Portfolio</span>
       <h2 class="section-title">Selected Projects</h2>
       <p class="section-description">
         Field-tested solutions across Ethiopia's diverse hydrogeological landscapes.
@@ -1454,7 +1659,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://w7.pngwing.com/pngs/575/201/png-transparent-addis-ababa-bole-international-airport-ethiopian-airlines-direct-flight-travel-text-logo-flight-thumbnail.png" alt="Ethiopian Airlines logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://w7.pngwing.com/pngs/575/201/png-transparent-addis-ababa-bole-international-airport-ethiopian-airlines-direct-flight-travel-text-logo-flight-thumbnail.png" alt="Ethiopian Airlines logo">
       </div>
       <div class="project-info">
         <span class="project-client">Ethiopian Airlines</span>
@@ -1472,7 +1677,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_MdzIl5rwVCIMdWA3JvCbKAb9RRH3hgd-WIWt95MvQ&s=10" alt="Tsedey Bank logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_MdzIl5rwVCIMdWA3JvCbKAb9RRH3hgd-WIWt95MvQ&s=10" alt="Tsedey Bank logo">
       </div>
       <div class="project-info">
         <span class="project-client">Tsedey Bank S.C.</span>
@@ -1490,7 +1695,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJRSa6OHYLnn_Cd_Tx1i6F2va5lURYlEVWHnGOVUnQQ&s=10" alt="IREC logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJRSa6OHYLnn_Cd_Tx1i6F2va5lURYlEVWHnGOVUnQQ&s=10" alt="IREC logo">
       </div>
       <div class="project-info">
         <span class="project-client">IREC</span>
@@ -1508,7 +1713,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://cdn.imweb.me/upload/S2023082175cb66548ec88/d889605fc3661.png" alt="Team & Team International logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://cdn.imweb.me/upload/S2023082175cb66548ec88/d889605fc3661.png" alt="Team & Team International logo">
       </div>
       <div class="project-info">
         <span class="project-client">Team & Team International</span>
@@ -1526,7 +1731,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3la9OhFlFuMDkVy0wKQtChW-DvPRkP1VoVVZSUpgHAJEj4bc96ZDdjp0&s=10" alt="MIDROC Investment Group logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3la9OhFlFuMDkVy0wKQtChW-DvPRkP1VoVVZSUpgHAJEj4bc96ZDdjp0&s=10" alt="MIDROC Investment Group logo">
       </div>
       <div class="project-info">
         <span class="project-client">MIDROC Investment Group</span>
@@ -1544,7 +1749,7 @@
 
     <div class="project-showcase reverse reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQZ_TRFy7H7flMqUwXOzpa4EKiG8l9O-HQVvgbFR3r5fBOfEYrfNM8OS3c&s=10" alt="International Medical Corps logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQZ_TRFy7H7flMqUwXOzpa4EKiG8l9O-HQVvgbFR3r5fBOfEYrfNM8OS3c&s=10" alt="International Medical Corps logo">
       </div>
       <div class="project-info">
         <span class="project-client">International Medical Corps</span>
@@ -1562,7 +1767,7 @@
 
     <div class="project-showcase reveal">
       <div class="project-image">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclJSLB8PWspsMVAESPJSAO2rlsL-liGfThswXDMJD5A&s=10" alt="ChildFund Ethiopia logo" style="object-fit: contain; background: rgba(255,255,255,0.95); padding: 40px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclJSLB8PWspsMVAESPJSAO2rlsL-liGfThswXDMJD5A&s=10" alt="ChildFund Ethiopia logo">
       </div>
       <div class="project-info">
         <span class="project-client">ChildFund Ethiopia</span>
@@ -1583,7 +1788,7 @@
 <section class="about" id="about">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-label">Sheet 05 — Who We Are</span>
+      <span class="section-label">Sheet 06 — Who We Are</span>
       <h2 class="section-title">Mission, Vision, Values</h2>
       <p class="section-description">
         Milto Engineering PLC is a grade-one water resources and related-fields 
